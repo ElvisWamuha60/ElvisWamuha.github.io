@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Elvis Wamuha Gitau – German Tutor & Software Developer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f6f4ef; --surface:#ffffff; --ink:#1b2236; --muted:#5b6275; --line:#ddd9cf;
+  --accent:#c8102e; --gold:#e0a800; --band:#1b2236; --band-ink:#f6f4ef;
+  box-sizing:border-box; padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){--bg:#11151f;--surface:#1a2030;--ink:#eee9dd;--muted:#a3a9b8;--line:#2b3347;--accent:#ff5a6e;--gold:#f0c23a;--band:#0a0d15;--band-ink:#eee9dd;color-scheme:dark}
+}
+:root[data-theme="dark"]{--bg:#11151f;--surface:#1a2030;--ink:#eee9dd;--muted:#a3a9b8;--line:#2b3347;--accent:#ff5a6e;--gold:#f0c23a;--band:#0a0d15;--band-ink:#eee9dd;color-scheme:dark}
+html{scroll-padding-top:env(safe-area-inset-top,0px);scroll-behavior:smooth}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"DM Sans",system-ui,sans-serif;line-height:1.6}
+h1,h2,h3{font-family:Fraunces,Georgia,serif;line-height:1.15;margin:0}
+a{color:inherit}
+.wrap{max-width:1040px;margin:0 auto;padding:0 22px}
+.flagbar{height:8px;background:linear-gradient(to bottom,#111 33.3%,#c8102e 33.3% 66.6%,#e0a800 66.6%)}
+nav{display:flex;justify-content:space-between;align-items:center;padding:18px 0;gap:12px;flex-wrap:wrap}
+nav b{font-family:Fraunces,serif;font-size:1.1rem}
+nav div a{margin-left:18px;text-decoration:none;color:var(--muted);font-size:.95rem}
+nav div a:hover{color:var(--accent)}
+.hero{padding:46px 0 70px;display:grid;grid-template-columns:1.4fr 1fr;gap:40px;align-items:center}
+.hero h1{font-size:clamp(2.8rem,8vw,5.6rem);font-weight:700;letter-spacing:-.02em}
+.hero h1 span{display:block;font-size:.38em;font-weight:500;color:var(--muted);letter-spacing:0;margin-top:14px}
+.hero p{max-width:52ch;font-size:1.1rem;color:var(--muted)}
+.btns{display:flex;gap:12px;flex-wrap:wrap;margin-top:26px}
+.btn{display:inline-block;padding:13px 22px;border-radius:999px;background:var(--accent);color:#fff;text-decoration:none;font-weight:700;border:2px solid var(--accent);cursor:pointer;font:inherit;font-weight:700}
+.btn.ghost{background:transparent;color:var(--ink);border-color:var(--ink)}
+.btn:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible,a:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+.grade{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:28px;text-align:center}
+.avatar{width:130px;height:130px;border-radius:50%;margin:0 auto 16px;display:grid;place-items:center;font-family:Fraunces,serif;font-size:3rem;font-weight:700;color:#fff;background:linear-gradient(135deg,#0f2e3d,#1f6f78);border:5px solid var(--gold)}
+.avatar img{width:100%;height:100%;border-radius:50%;object-fit:cover}
+.grade h3{font-size:1.4rem}
+.grade small{display:block;color:var(--muted);margin-top:8px}
+.grade hr{border:0;border-top:1px dashed var(--line);margin:18px 0}
+.grade em{font-family:Fraunces,serif;font-size:1.1rem}
+section{padding:64px 0}
+h2{font-size:clamp(1.8rem,4vw,2.5rem);margin-bottom:8px}
+.sub{color:var(--muted);margin:0 0 30px;max-width:60ch}
+.levels{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.level{background:var(--surface);border:1px solid var(--line);border-top:5px solid var(--gold);border-radius:12px;padding:24px}
+.level:nth-child(2){border-top-color:var(--accent)}
+.level:nth-child(3){border-top-color:var(--ink)}
+.level h3{font-size:2.2rem}
+.level strong{display:block;margin:2px 0 10px}
+.level p{margin:0;color:var(--muted);font-size:.97rem}
+.band{background:linear-gradient(135deg,#0f2e3d,#17525c);color:#f4f1e8}
+.band2{background:linear-gradient(135deg,#1c2150,#3b2a6b)}
+.band h2{color:var(--gold)}
+.tint{background:color-mix(in srgb,var(--gold) 12%,var(--bg))}
+.tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+.tags span{padding:6px 14px;border-radius:999px;background:var(--bg);border:1px solid var(--line);font-size:.9rem;font-weight:500}
+.techgrid{display:grid;grid-template-columns:1.2fr 1fr;gap:18px}
+.techgrid .card:first-child{border-left:5px solid #1f6f78}
+.techgrid h3{color:#1f6f78}
+@media (prefers-color-scheme:dark){.techgrid h3{color:#5fc4ce}}
+.proverbs{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+.prov{border-left:3px solid var(--gold);padding:6px 0 6px 18px}
+.prov q{font-family:Fraunces,serif;font-size:1.3rem;quotes:none;display:block}
+.prov span{opacity:.75;font-size:.95rem}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;text-align:center}
+.stat{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:22px}
+.stat b{font-family:Fraunces,serif;font-size:2.2rem;display:block}
+.stat span{color:var(--muted);font-size:.95rem}
+.price{display:flex;flex-wrap:wrap;gap:30px;align-items:center;justify-content:space-between;background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:34px}
+.price .amt{font-family:Fraunces,serif;font-size:clamp(2.4rem,6vw,3.8rem);font-weight:700;color:var(--accent);line-height:1}
+.price .amt small{font-size:.4em;color:var(--muted);font-weight:500}
+.price ul{margin:0;padding-left:20px;color:var(--muted)}
+.reviews{display:grid;grid-template-columns:1fr 1fr;gap:30px;align-items:start}
+.rlist{display:grid;gap:14px}
+.review{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:18px}
+.review .stars{color:var(--gold);letter-spacing:2px}
+.review p{margin:6px 0 8px}
+.review small{color:var(--muted)}
+.empty{border:1px dashed var(--line);border-radius:12px;padding:22px;color:var(--muted)}
+form{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:22px;display:grid;gap:12px}
+label{font-weight:500;font-size:.95rem;display:grid;gap:5px}
+input,textarea,select{font:inherit;padding:10px 12px;border-radius:8px;border:1px solid var(--line);background:var(--bg);color:var(--ink);width:100%}
+.note{font-size:.85rem;color:var(--muted);margin:0}
+.contact{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:24px}
+.card h3{font-size:1.2rem;margin-bottom:6px}
+.card a{font-size:1.2rem;font-weight:700;text-decoration:none;color:var(--accent);word-break:break-all}
+footer{text-align:center;padding:30px 0 40px;color:var(--muted);font-size:.9rem}
+footer q{font-family:Fraunces,serif;font-size:1.15rem;display:block;color:var(--ink);quotes:none;margin-bottom:6px}
+@media (max-width:760px){
+  .hero,.reviews,.contact,.proverbs,.levels,.stats,.techgrid{grid-template-columns:1fr}
+  .hero{padding-top:24px}
+}
+.level,.stat,.card,.review,.grade,.price,.prov,.tags span{transition:transform .25s ease,box-shadow .25s ease;transform-origin:center}
+.level:hover,.stat:hover,.card:hover,.grade:hover,.price:hover{transform:scale(1.04);box-shadow:0 14px 30px rgba(0,0,0,.18);position:relative;z-index:2}
+.review:hover,.prov:hover{transform:scale(1.03)}
+.tags span:hover{transform:scale(1.1)}
+@media (hover:none){.level:hover,.stat:hover,.card:hover,.grade:hover,.price:hover,.review:hover,.prov:hover,.tags span:hover{transform:none;box-shadow:none}}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.level,.stat,.card,.review,.grade,.price,.prov,.tags span{transition:none}.level:hover,.stat:hover,.card:hover,.grade:hover,.price:hover,.review:hover,.prov:hover,.tags span:hover{transform:none}}
+</style>
+</head>
+<body>
+<div class="flagbar"></div>
+<div class="wrap">
+  <nav>
+    <b>Elvis Wamuha Gitau</b>
+    <div><a href="#levels">Levels</a><a href="#tech">Tech</a><a href="#rates">Rates</a><a href="#reviews">Reviews</a><a href="#contact">Contact</a></div>
+  </nav>
+
+  <header class="hero">
+    <div>
+      <h1>Guten Tag!<span>Learn German step by step, from first greetings to confident conversations.</span></h1>
+      <p>Hallo! I’m Elvis, a German tutor and software developer. I teach beginners and growing speakers from A1 to B1 with clear explanations, speaking practice and plenty of patience.</p>
+      <div class="btns">
+        <a class="btn" href="#contact">Book a lesson</a>
+        <a class="btn ghost" href="#reviews">Read reviews</a>
+      </div>
+    </div>
+    <aside class="grade" aria-label="Profile">
+      <div class="avatar" role="img" aria-label="Profile picture of Elvis Wamuha Gitau">EG</div>
+      <h3>Elvis Wamuha Gitau</h3>
+      <small>German Tutor · Software Developer</small>
+      <hr>
+      <em>Übung macht den Meister.</em>
+      <small>Practice makes perfect.</small>
+    </aside>
+  </header>
+</div>
+
+<section id="levels" class="tint">
+  <div class="wrap">
+    <h2>Was ich unterrichte <small style="font-size:.5em;color:var(--muted);font-weight:500">· What I teach</small></h2>
+    <p class="sub">Three levels of the Common European Framework (CEFR), each taught with real conversation and exercises.</p>
+    <div class="levels">
+      <div class="level"><h3>A1</h3><strong>Anfänger · Beginner</strong><p>Alphabet and pronunciation, greetings, numbers, introducing yourself, simple present tense and everyday phrases.</p></div>
+      <div class="level"><h3>A2</h3><strong>Grundlagen · Elementary</strong><p>Past tense, cases, shopping, directions, daily routines, short messages and simple conversations.</p></div>
+      <div class="level"><h3>B1</h3><strong>Mittelstufe · Intermediate</strong><p>Express opinions, longer texts, formal and informal writing, listening practice and exam preparation.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="band">
+  <div class="wrap">
+    <h2>Weisheiten zum Lernen</h2>
+    <p class="sub" style="color:inherit;opacity:.75">German sayings we pick up along the way.</p>
+    <div class="proverbs">
+      <div class="prov"><q>Aller Anfang ist schwer.</q><span>Every beginning is hard.</span></div>
+      <div class="prov"><q>Übung macht den Meister.</q><span>Practice makes perfect.</span></div>
+      <div class="prov"><q>Ohne Fleiß kein Preis.</q><span>No pain, no gain.</span></div>
+      <div class="prov"><q>Wer rastet, der rostet.</q><span>He who rests, rusts.</span></div>
+      <div class="prov"><q>Steter Tropfen höhlt den Stein.</q><span>Constant dripping wears away the stone.</span></div>
+      <div class="prov"><q>Gut Ding will Weile haben.</q><span>Good things take time.</span></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>Über mich <small style="font-size:.5em;color:var(--muted);font-weight:500">· About me</small></h2>
+    <p class="sub">Proven results in KCSE German and hands-on teaching experience.</p>
+    <div class="stats">
+      <div class="stat"><b>A</b><span>KCSE German grade</span></div>
+      <div class="stat"><b>3</b><span>Students taught</span></div>
+      <div class="stat"><b>A1–B1</b><span>Levels covered</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="rates" style="padding-top:0">
+  <div class="wrap">
+    <h2>Preise <small style="font-size:.5em;color:var(--muted);font-weight:500">· Rates</small></h2>
+    <p class="sub">Simple, fair pricing.</p>
+    <div class="price">
+      <div class="amt">KES 1,500<small> / 2 hours</small></div>
+      <ul>
+        <li>Any level: A1, A2 or B1</li>
+        <li>Speaking, listening, reading and writing</li>
+        <li>Practice material included</li>
+      </ul>
+      <a class="btn" href="#contact">Book now</a>
+    </div>
+  </div>
+</section>
+
+<section id="reviews" class="band band2">
+  <div class="wrap">
+    <h2>Das sagen meine Schüler</h2>
+    <p class="sub" style="color:inherit;opacity:.75">What my students say. Past students, add yours below.</p>
+    <div class="reviews">
+      <div class="rlist" id="rlist"></div>
+      <form id="rform" style="color:var(--ink)">
+        <label>Your name<input id="rname" required maxlength="60" autocomplete="name"></label>
+        <label>Level studied
+          <select id="rlevel"><option>A1</option><option>A2</option><option>B1</option></select>
+        </label>
+        <label>Rating
+          <select id="rstars"><option value="5">★★★★★ Excellent</option><option value="4">★★★★ Very good</option><option value="3">★★★ Good</option><option value="2">★★ Fair</option><option value="1">★ Poor</option></select>
+        </label>
+        <label>Your review<textarea id="rtext" rows="4" required maxlength="500"></textarea></label>
+        <button class="btn" type="submit">Add my review</button>
+        <button class="btn ghost" type="button" id="rmail">Send review to my tutor by email</button>
+        <p class="note">Your review shows on this device straight away. Use the email button to send it to your tutor for the public list.</p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<section id="tech" class="tint">
+  <div class="wrap">
+    <h2>Tech &amp; Code <small style="font-size:.5em;color:var(--muted);font-weight:500">· Beyond the classroom</small></h2>
+    <p class="sub">I’m also a software developer, and I love technology.</p>
+    <div class="techgrid">
+      <div class="card"><h3>Developer by day, Deutsch by choice</h3><p style="margin:0;color:var(--muted)">I build software and follow new technology closely. German is a language of engineering, science and innovation, so I enjoy helping learners use it for study, work and tech careers.</p>
+        <div class="tags"><span>Software development</span><span>Web &amp; apps</span><span>Problem solving</span><span>Tech enthusiast</span></div></div>
+      <div class="card"><h3>Tech-friendly lessons</h3><p style="margin:0;color:var(--muted)">Lessons can be online, with digital notes, practice exercises and useful apps. You can also pick up tech vocabulary, such as <i>der Computer</i>, <i>die Datei</i> and <i>das Passwort</i>.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="wrap">
+    <h2>Kontakt <small style="font-size:.5em;color:var(--muted);font-weight:500">· Get in touch</small></h2>
+    <p class="sub">Ready to start? Send a message and we’ll agree on a time.</p>
+    <div class="contact">
+      <div class="card"><h3>Phone / WhatsApp</h3><a href="tel:+254141910084">0141 910 084</a><p style="margin:8px 0 0"><a href="https://wa.me/254141910084" style="font-size:1rem">Message on WhatsApp</a></p></div>
+      <div class="card"><h3>Email</h3><a href="mailto:gitauelvis@gmail.com">gitauelvis@gmail.com</a></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <b>© Elvis Wamuha Gitau</b><br><br>
+  <q>Wer eine neue Sprache lernt, gewinnt eine neue Welt.</q>
+  Whoever learns a new language gains a new world.
+</footer>
+
+<script>
+(function(){
+  var EMAIL="gitauelvis@gmail.com", KEY="german-tutor-reviews";
+  var base=[];
+  var mine=[];
+  try{mine=JSON.parse(localStorage.getItem(KEY)||"[]")}catch(e){mine=[]}
+  var list=document.getElementById("rlist");
+  function render(){
+    list.textContent="";
+    var all=base.concat(mine);
+    if(!all.length){
+      var d=document.createElement("div");d.className="empty";
+      d.textContent="No reviews yet. Be the first to share your experience.";
+      list.appendChild(d);return;
+    }
+    all.forEach(function(r){
+      var d=document.createElement("div");d.className="review";d.style.color="var(--ink)";
+      var s=document.createElement("div");s.className="stars";s.textContent="★".repeat(r.stars)+"☆".repeat(5-r.stars);
+      var p=document.createElement("p");p.textContent=r.text;
+      var m=document.createElement("small");m.textContent=r.name+" · Level "+r.level;
+      d.append(s,p,m);list.appendChild(d);
+    });
+  }
+  function read(){
+    return {name:document.getElementById("rname").value.trim(),level:document.getElementById("rlevel").value,
+      stars:parseInt(document.getElementById("rstars").value,10),text:document.getElementById("rtext").value.trim()};
+  }
+  document.getElementById("rform").addEventListener("submit",function(e){
+    e.preventDefault();
+    var r=read();if(!r.name||!r.text)return;
+    mine.push(r);
+    try{localStorage.setItem(KEY,JSON.stringify(mine))}catch(err){}
+    e.target.reset();render();
+  });
+  document.getElementById("rmail").addEventListener("click",function(){
+    var r=read();
+    if(!r.name||!r.text){document.getElementById("rname").reportValidity();return}
+    var body="Name: "+r.name+"\nLevel: "+r.level+"\nRating: "+r.stars+"/5\n\n"+r.text;
+    location.href="mailto:"+EMAIL+"?subject="+encodeURIComponent("Review for my German lessons")+"&body="+encodeURIComponent(body);
+  });
+  render();
+})();
+</script>
+</body>
+</html>
