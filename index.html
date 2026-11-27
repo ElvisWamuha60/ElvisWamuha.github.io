@@ -304,9 +304,10 @@ footer q{font-family:Fraunces,serif;font-size:1.15rem;display:block;color:var(--
         text:{stringValue:r.text},approved:{booleanValue:false},
         createdAt:{timestampValue:new Date().toISOString()}}})})
     .then(function(res){
-      if(!res.ok)throw new Error("fail");
+      if(!res.ok){return res.json().catch(function(){return {}}).then(function(j){
+        var m=(j&&j.error&&(j.error.status+": "+j.error.message))||("HTTP "+res.status);throw new Error(m)})}
       form.reset();say("Thank you! Your review will appear here once Elvis approves it.");
-    }).catch(function(){say("Sorry, your review could not be sent. Please try again or use the email button.")})
+    }).catch(function(err){console.error(err);say("Sorry, your review could not be sent ("+(err&&err.message?err.message.slice(0,120):"network error")+"). Please try again or use the email button.")})
     .then(function(){btn.disabled=false});
   });
   document.getElementById("rmail").addEventListener("click",function(){
