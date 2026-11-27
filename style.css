@@ -1,0 +1,614 @@
+/* ==========================================================
+   style.css  -  how the portfolio LOOKS
+   Elvis Wamuha Gitau - German Tutor & Software Developer
+
+   CSS controls colours, fonts, spacing and layout.
+   Rule format:   selector { property: value; }
+   ========================================================== */
+
+/* COLOUR THEME
+   All colours live here as variables (--name). Change a colour once and it
+   updates everywhere. Light mode is the default. */
+:root {
+  --bg: #f6f4ef;
+  --surface: #ffffff;
+  --ink: #1b2236;
+  --muted: #5b6275;
+  --line: #ddd9cf;
+  --accent: #c8102e;
+  --gold: #e0a800;
+  --band: #1b2236;
+  --band-ink: #f6f4ef;
+  box-sizing: border-box;
+  padding-top: env(safe-area-inset-top,0px);
+  padding-bottom: env(safe-area-inset-bottom,0px);
+}
+
+/* DARK MODE (automatic)
+   If the visitor's phone/computer is in dark mode, these darker colours are used. */
+@media (prefers-color-scheme:dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #11151f;
+    --surface: #1a2030;
+    --ink: #eee9dd;
+    --muted: #a3a9b8;
+    --line: #2b3347;
+    --accent: #ff5a6e;
+    --gold: #f0c23a;
+    --band: #0a0d15;
+    --band-ink: #eee9dd;
+    color-scheme: dark;
+  }
+}
+
+/* Dark colours used when the theme is forced to dark. */
+:root[data-theme="dark"] {
+  --bg: #11151f;
+  --surface: #1a2030;
+  --ink: #eee9dd;
+  --muted: #a3a9b8;
+  --line: #2b3347;
+  --accent: #ff5a6e;
+  --gold: #f0c23a;
+  --band: #0a0d15;
+  --band-ink: #eee9dd;
+  color-scheme: dark;
+}
+
+/* BASE STYLES
+   Smooth scrolling when you click the menu links, and general page defaults. */
+html {
+  scroll-padding-top: env(safe-area-inset-top,0px);
+  scroll-behavior: smooth;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: "DM Sans",system-ui,sans-serif;
+  line-height: 1.6;
+}
+
+h1, h2, h3 {
+  font-family: Fraunces,Georgia,serif;
+  line-height: 1.15;
+  margin: 0;
+}
+
+a {
+  color: inherit;
+}
+
+/* LAYOUT
+   .wrap keeps the content centred and not too wide on big screens. */
+.wrap {
+  max-width: 1040px;
+  margin: 0 auto;
+  padding: 0 22px;
+}
+
+/* TOP BAR & NAVIGATION
+   Thin black-red-gold stripe at the very top, then the name and menu links. */
+.flagbar {
+  height: 8px;
+  background: linear-gradient(to bottom,#111 33.3%,#c8102e 33.3% 66.6%,#e0a800 66.6%);
+}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px 0;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+nav b {
+  font-family: Fraunces,serif;
+  font-size: 1.1rem;
+}
+
+nav div a {
+  margin-left: 18px;
+  text-decoration: none;
+  color: var(--muted);
+  font-size: .95rem;
+}
+
+nav div a:hover {
+  color: var(--accent);
+}
+
+/* HERO (the first section)
+   Two columns: big greeting on the left, profile card on the right. */
+.hero {
+  padding: 46px 0 70px;
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 40px;
+  align-items: center;
+}
+
+.hero h1 {
+  font-size: clamp(2.8rem,8vw,5.6rem);
+  font-weight: 700;
+  letter-spacing: -.02em;
+}
+
+.hero h1 span {
+  display: block;
+  font-size: .38em;
+  font-weight: 500;
+  color: var(--muted);
+  letter-spacing: 0;
+  margin-top: 14px;
+}
+
+.hero p {
+  max-width: 52ch;
+  font-size: 1.1rem;
+  color: var(--muted);
+}
+
+.btns {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 26px;
+}
+
+/* BUTTONS
+   .btn is the filled red button; .btn.ghost is the outlined one. */
+.btn {
+  display: inline-block;
+  padding: 13px 22px;
+  border-radius: 999px;
+  background: var(--accent);
+  color: #fff;
+  text-decoration: none;
+  font-weight: 700;
+  border: 2px solid var(--accent);
+  cursor: pointer;
+  font: inherit;
+  font-weight: 700;
+}
+
+.btn.ghost {
+  background: transparent;
+  color: var(--ink);
+  border-color: var(--ink);
+}
+
+.btn:focus-visible, input:focus-visible, textarea:focus-visible, select:focus-visible, a:focus-visible {
+  outline: 3px solid var(--gold);
+  outline-offset: 2px;
+}
+
+/* PROFILE CARD
+   The card with your photo, name and the proverb under it. */
+.grade {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  padding: 28px;
+  text-align: center;
+}
+
+.avatar {
+  width: 150px;
+  height: 150px;
+  overflow: hidden;
+  background: #fff;
+  border-radius: 50%;
+  margin: 0 auto 16px;
+  display: grid;
+  place-items: center;
+  font-family: Fraunces,serif;
+  font-size: 3rem;
+  font-weight: 700;
+  color: #fff;
+  background: linear-gradient(135deg,#0f2e3d,#1f6f78);
+  border: 5px solid var(--gold);
+}
+
+.avatar img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.grade h3 {
+  font-size: 1.4rem;
+}
+
+.grade small {
+  display: block;
+  color: var(--muted);
+  margin-top: 8px;
+}
+
+.grade hr {
+  border: 0;
+  border-top: 1px dashed var(--line);
+  margin: 18px 0;
+}
+
+.grade em {
+  font-family: Fraunces,serif;
+  font-size: 1.1rem;
+}
+
+/* GENERAL SECTION STYLES
+   Spacing and headings shared by every section. */
+section {
+  padding: 64px 0;
+}
+
+h2 {
+  font-size: clamp(1.8rem,4vw,2.5rem);
+  margin-bottom: 8px;
+}
+
+.sub {
+  color: var(--muted);
+  margin: 0 0 30px;
+  max-width: 60ch;
+}
+
+/* LEVELS (A1, A2, B1 cards) */
+.levels {
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  gap: 18px;
+}
+
+.level {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-top: 5px solid var(--gold);
+  border-radius: 12px;
+  padding: 24px;
+}
+
+.level:nth-child(2) {
+  border-top-color: var(--accent);
+}
+
+.level:nth-child(3) {
+  border-top-color: var(--ink);
+}
+
+.level h3 {
+  font-size: 2.2rem;
+}
+
+.level strong {
+  display: block;
+  margin: 2px 0 10px;
+}
+
+.level p {
+  margin: 0;
+  color: var(--muted);
+  font-size: .97rem;
+}
+
+/* COLOURED BAND SECTIONS
+   .band = teal background (Proverbs), .band2 = indigo (Reviews),
+   .tint = soft warm background (Levels and Tech). */
+.band {
+  background: linear-gradient(135deg,#0f2e3d,#17525c);
+  color: #f4f1e8;
+}
+
+.band2 {
+  background: linear-gradient(135deg,#1c2150,#3b2a6b);
+}
+
+.band h2 {
+  color: var(--gold);
+}
+
+.tint {
+  background: color-mix(in srgb,var(--gold) 12%,var(--bg));
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 16px;
+}
+
+.tags span {
+  padding: 6px 14px;
+  border-radius: 999px;
+  background: var(--bg);
+  border: 1px solid var(--line);
+  font-size: .9rem;
+  font-weight: 500;
+}
+
+/* TECH & CODE SECTION */
+.techgrid {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 18px;
+}
+
+.techgrid .card:first-child {
+  border-left: 5px solid #1f6f78;
+}
+
+.techgrid h3 {
+  color: #1f6f78;
+}
+
+/* Small dark-mode tweak: lighter teal for the Tech section headings. */
+@media (prefers-color-scheme:dark) {
+  .techgrid h3 {
+    color: #5fc4ce;
+  }
+}
+
+/* PROVERBS (German sayings) */
+.proverbs {
+  display: grid;
+  grid-template-columns: repeat(2,1fr);
+  gap: 16px;
+}
+
+.prov {
+  border-left: 3px solid var(--gold);
+  padding: 6px 0 6px 18px;
+}
+
+.prov q {
+  font-family: Fraunces,serif;
+  font-size: 1.3rem;
+  quotes: none;
+  display: block;
+}
+
+.prov span {
+  opacity: .75;
+  font-size: .95rem;
+}
+
+/* ABOUT / STATS BOXES */
+.stats {
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  gap: 18px;
+  text-align: center;
+}
+
+.stat {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 22px;
+}
+
+.stat b {
+  font-family: Fraunces,serif;
+  font-size: 2.2rem;
+  display: block;
+}
+
+.stat span {
+  color: var(--muted);
+  font-size: .95rem;
+}
+
+/* RATES BOX (KES 1,500 per 2 hours) */
+.price {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  padding: 34px;
+}
+
+.price .amt {
+  font-family: Fraunces,serif;
+  font-size: clamp(2.4rem,6vw,3.8rem);
+  font-weight: 700;
+  color: var(--accent);
+  line-height: 1;
+}
+
+.price .amt small {
+  font-size: .4em;
+  color: var(--muted);
+  font-weight: 500;
+}
+
+.price ul {
+  margin: 0;
+  padding-left: 20px;
+  color: var(--muted);
+}
+
+/* REVIEWS
+   Left: list of reviews. Right: the form where visitors write a review. */
+.reviews {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+  align-items: start;
+}
+
+.rlist {
+  display: grid;
+  gap: 14px;
+}
+
+.review {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 18px;
+}
+
+.review .stars {
+  color: var(--gold);
+  letter-spacing: 2px;
+}
+
+.review p {
+  margin: 6px 0 8px;
+}
+
+.review small {
+  color: var(--muted);
+}
+
+.empty {
+  border: 1px dashed var(--line);
+  border-radius: 12px;
+  padding: 22px;
+  color: var(--muted);
+}
+
+/* REVIEW FORM FIELDS */
+form {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 22px;
+  display: grid;
+  gap: 12px;
+}
+
+label {
+  font-weight: 500;
+  font-size: .95rem;
+  display: grid;
+  gap: 5px;
+}
+
+input, textarea, select {
+  font: inherit;
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid var(--line);
+  background: var(--bg);
+  color: var(--ink);
+  width: 100%;
+}
+
+.note {
+  font-size: .85rem;
+  color: var(--muted);
+  margin: 0;
+}
+
+/* CONTACT CARDS */
+.contact {
+  display: grid;
+  grid-template-columns: repeat(2,1fr);
+  gap: 18px;
+}
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 24px;
+}
+
+.card h3 {
+  font-size: 1.2rem;
+  margin-bottom: 6px;
+}
+
+.card a {
+  font-size: 1.2rem;
+  font-weight: 700;
+  text-decoration: none;
+  color: var(--accent);
+  word-break: break-all;
+}
+
+/* FOOTER */
+footer {
+  text-align: center;
+  padding: 30px 0 40px;
+  color: var(--muted);
+  font-size: .9rem;
+}
+
+footer q {
+  font-family: Fraunces,serif;
+  font-size: 1.15rem;
+  display: block;
+  color: var(--ink);
+  quotes: none;
+  margin-bottom: 6px;
+}
+
+/* MOBILE LAYOUT
+   On screens narrower than 760px, two- and three-column layouts become one column. */
+@media (max-width:760px) {
+  .hero, .reviews, .contact, .proverbs, .levels, .stats, .techgrid {
+    grid-template-columns: 1fr;
+  }
+  .hero {
+    padding-top: 24px;
+  }
+}
+
+/* HOVER EFFECTS
+   Cards grow slightly when the mouse is over them. Turned off on touch
+   screens and for people who prefer reduced motion. */
+.level, .stat, .card, .review, .grade, .price, .prov, .tags span {
+  transition: transform .25s ease,box-shadow .25s ease;
+  transform-origin: center;
+}
+
+.level:hover, .stat:hover, .card:hover, .grade:hover, .price:hover {
+  transform: scale(1.04);
+  box-shadow: 0 14px 30px rgba(0,0,0,.18);
+  position: relative;
+  z-index: 2;
+}
+
+.review:hover, .prov:hover {
+  transform: scale(1.03);
+}
+
+.tags span:hover {
+  transform: scale(1.1);
+}
+
+@media (hover:none) {
+  .level:hover, .stat:hover, .card:hover, .grade:hover, .price:hover, .review:hover, .prov:hover, .tags span:hover {
+    transform: none;
+    box-shadow: none;
+  }
+}
+
+/* ACCESSIBILITY
+   Removes animations for people who have reduced motion switched on in their device. */
+@media (prefers-reduced-motion:reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .level, .stat, .card, .review, .grade, .price, .prov, .tags span {
+    transition: none;
+  }
+  .level:hover, .stat:hover, .card:hover, .grade:hover, .price:hover, .review:hover, .prov:hover, .tags span:hover {
+    transform: none;
+  }
+}
