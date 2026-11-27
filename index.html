@@ -1,213 +1,174 @@
 <!DOCTYPE html>
-<html lang="en" class="sm:scroll-smooth">
+<!-- ==========================================================
+     index.html  -  the STRUCTURE and TEXT of the portfolio
+     Elvis Wamuha Gitau - German Tutor & Software Developer
 
+     Files in this project:
+       index.html   this file: the content (headings, text, links)
+       style.css    colours, fonts and layout
+       script.js    the reviews feature
+       profile.jpg  your profile photo
+     Edit text in this file, then upload all files to GitHub.
+     ========================================================== -->
+<html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Acme Rockets</title>
-  <link rel="stylesheet" href="css/style.css" />
-  <script src="js/main.js" defer></script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Elvis Wamuha Gitau – German Tutor & Software Developer</title>
+<!-- Google Fonts: Fraunces (headings) and DM Sans (body text) -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<!-- Our own styles (colours, layout) -->
+<link rel="stylesheet" href="style.css">
 </head>
+<body>
+<!-- TOP STRIPE: black, red and gold -->
+<div class="flagbar"></div>
+<div class="wrap">
+  <!-- NAVIGATION: your name and the menu links (each # link jumps to a section id below) -->
+<nav>
+    <b>Elvis Wamuha Gitau</b>
+    <div><a href="#levels">Levels</a><a href="#tech">Tech</a><a href="#rates">Rates</a><a href="#reviews">Reviews</a><a href="#contact">Contact</a></div>
+  </nav>
 
-<body class="min-h-screen bg-slate-50 dark:bg-black dark:text-white">
-  <header class="sticky top-0 z-10 bg-teal-700 text-white">
-    <section class="mx-auto flex max-w-4xl items-center justify-between p-4">
-      <h1 class="text-3xl font-medium">
-        <a href="#hero">🚀 Acme Rockets</a>
-      </h1>
-      <div>
-        <button id="hamburger-button" class="relative h-8 w-8 cursor-pointer text-3xl md:hidden">
-          <!-- &#9776; -->
-          <div
-            class="absolute top-4 -mt-0.5 h-1 w-8 rounded bg-white transition-all duration-500 before:absolute before:h-1 before:w-8 before:-translate-x-4 before:-translate-y-3 before:rounded before:bg-white before:transition-all before:duration-500 before:content-[''] after:absolute after:h-1 after:w-8 after:-translate-x-4 after:translate-y-3 after:rounded after:bg-white after:transition-all after:duration-500 after:content-['']">
-          </div>
-        </button>
-        <nav class="hidden space-x-8 text-xl md:block" aria-label="main">
-          <a href="#rockets" class="hover:opacity-90">Our Rockets</a>
-          <a href="#testimonials" class="hover:opacity-90">Testimonials</a>
-          <a href="#contact" class="hover:opacity-90">Contact Us</a>
-        </nav>
+  <!-- HERO: greeting, short introduction, buttons and your profile card -->
+<header class="hero">
+    <div>
+      <h1>Guten Tag!<span>Learn German step by step, from first greetings to confident conversations.</span></h1>
+      <p>Hallo! I’m Elvis, a German tutor and software developer. I teach beginners and growing speakers from A1 to B1 with clear explanations, speaking practice and plenty of patience.</p>
+      <div class="btns">
+        <a class="btn" href="#contact">Book a lesson</a>
+        <a class="btn ghost" href="#reviews">Read reviews</a>
       </div>
-    </section>
-    <section id="mobile-menu"
-      class="top-68 justify-content-center absolute hidden w-full origin-top animate-open-menu flex-col bg-black text-5xl">
-      <!-- <button class="text-8xl self-end px-6">
-                &times;
-            </button> -->
-      <nav class="flex min-h-screen flex-col items-center py-8" aria-label="mobile">
-        <a href="#hero" class="w-full py-6 text-center hover:opacity-90">Home</a>
-        <a href="#rockets" class="w-full py-6 text-center hover:opacity-90">Our Rockets</a>
-        <a href="#testimonials" class="w-full py-6 text-center hover:opacity-90">Testimonials</a>
-        <a href="#contact" class="w-full py-6 text-center hover:opacity-90">Contact Us</a>
-        <a href="#footer" class="w-full py-6 text-center hover:opacity-90">Legal</a>
-      </nav>
-    </section>
+    </div>
+    <aside class="grade" aria-label="Profile">
+      <div class="avatar"><img src="profile.JPG" alt="Profile picture of Elvis Wamuha Gitau"></div>
+      <h3>Elvis Wamuha Gitau</h3>
+      <small>German Tutor · Software Developer</small>
+      <hr>
+      <em>Übung macht den Meister.</em>
+      <small>Practice makes perfect.</small>
+    </aside>
   </header>
-  <main class="mx-auto max-w-4xl">
-    <section id="hero"
-      class="widescreen:section-min-height tallscreen:section-min-height mb-12 flex scroll-mt-40 flex-col-reverse items-center justify-center gap-8 p-6 sm:flex-row">
-      <article class="sm:w-1/2">
-        <h2 class="max-w-md text-center text-4xl font-bold text-slate-900 dark:text-white sm:text-left sm:text-5xl">
-          We Boldy Go
-          <span class="text-indigo-700 dark:text-indigo-300">Where No Rocket</span>
-          Has Gone Before...
-        </h2>
-        <p class="mt-4 max-w-md text-center text-2xl text-slate-700 dark:text-slate-400 sm:text-left">
-          We're building rockets for the next century today. From the moon to
-          Mars, Jupiter and beyond...
-        </p>
-        <p class="mt-4 max-w-md text-center text-2xl text-slate-700 dark:text-slate-400 sm:text-left">
-          Think Acme Rockets.
-        </p>
-      </article>
-      <img class="w-1/2" src="./img/rocketdab.png" alt="Rocket Dab" />
-    </section>
+</div>
 
-    <hr class="mx-auto w-1/2 bg-black dark:bg-white" />
+<!-- LEVELS: what you teach (A1, A2, B1) -->
+<section id="levels" class="tint">
+  <div class="wrap">
+    <h2>Was ich unterrichte <small style="font-size:.5em;color:var(--muted);font-weight:500">· What I teach</small></h2>
+    <p class="sub">Three levels of the Common European Framework (CEFR), each taught with real conversation and exercises.</p>
+    <div class="levels">
+      <div class="level"><h3>A1</h3><strong>Anfänger · Beginner</strong><p>Alphabet and pronunciation, greetings, numbers, introducing yourself, simple present tense and everyday phrases.</p></div>
+      <div class="level"><h3>A2</h3><strong>Grundlagen · Elementary</strong><p>Past tense, cases, shopping, directions, daily routines, short messages and simple conversations.</p></div>
+      <div class="level"><h3>B1</h3><strong>Mittelstufe · Intermediate</strong><p>Express opinions, longer texts, formal and informal writing, listening practice and exam preparation.</p></div>
+    </div>
+  </div>
+</section>
 
-    <section id="rockets" class="widescreen:section-min-height tallscreen:section-min-height my-12 scroll-mt-20 p-6">
-      <h2 class="mb-6 text-center text-4xl font-bold text-slate-900 dark:text-white sm:text-5xl">
-        Our Rockets
-      </h2>
-      <ul class="mx-auto my-12 flex list-none flex-col items-center gap-8 sm:flex-row">
-        <li
-          class="flex w-2/3 flex-col items-center rounded-3xl border border-solid border-slate-900 bg-white py-6 px-2 shadow-xl dark:border-gray-100 dark:bg-black sm:w-5/6">
-          <img src="./img/rocketman.png" alt="Explorer" class="mb-6 w-1/2" />
-          <h3 class="text-center text-3xl text-slate-900 dark:text-white">
-            Explorer
-          </h3>
-          <p class="mt-2 hidden text-center text-3xl text-slate-500 dark:text-slate-400 sm:block">
-            $
-          </p>
-          <p class="mt-2 text-center text-2xl text-slate-500 dark:text-slate-400 sm:hidden">
-            Affordable Exploration
-          </p>
-        </li>
-        <li
-          class="flex w-2/3 flex-col items-center rounded-3xl border border-solid border-slate-900 bg-white py-6 px-2 shadow-xl dark:border-gray-100 dark:bg-black sm:w-5/6">
-          <img src="./img/rocketride.png" alt="Adventurer" class="mb-6 w-1/2" />
-          <h3 class="text-center text-3xl text-slate-900 dark:text-white">
-            Adventurer
-          </h3>
-          <p class="mt-2 hidden text-center text-3xl text-slate-500 dark:text-slate-400 sm:block">
-            $$
-          </p>
-          <p class="mt-2 text-center text-2xl text-slate-500 dark:text-slate-400 sm:hidden">
-            Best Selling Rocket!
-          </p>
-        </li>
-        <li
-          class="flex w-2/3 flex-col items-center rounded-3xl border border-solid border-slate-900 bg-white py-6 px-2 shadow-xl dark:border-gray-100 dark:bg-black sm:w-5/6">
-          <img src="./img/rocketlaunch.png" alt="Infinity" class="mb-6 w-1/2" />
-          <h3 class="text-center text-3xl text-slate-900 dark:text-white">
-            Infinity
-          </h3>
-          <p class="mt-2 hidden text-center text-3xl text-slate-500 dark:text-slate-400 sm:block">
-            $$$
-          </p>
-          <p class="mt-2 text-center text-2xl text-slate-500 dark:text-slate-400 sm:hidden">
-            Luxury Starship
-          </p>
-        </li>
+<!-- PROVERBS: German sayings with English meanings. Add or change a .prov block to edit them -->
+<section class="band">
+  <div class="wrap">
+    <h2>Weisheiten zum Lernen</h2>
+    <p class="sub" style="color:inherit;opacity:.75">German sayings we pick up along the way.</p>
+    <div class="proverbs">
+      <div class="prov"><q>Aller Anfang ist schwer.</q><span>Every beginning is hard.</span></div>
+      <div class="prov"><q>Übung macht den Meister.</q><span>Practice makes perfect.</span></div>
+      <div class="prov"><q>Ohne Fleiß kein Preis.</q><span>No pain, no gain.</span></div>
+      <div class="prov"><q>Wer rastet, der rostet.</q><span>He who rests, rusts.</span></div>
+      <div class="prov"><q>Steter Tropfen höhlt den Stein.</q><span>Constant dripping wears away the stone.</span></div>
+      <div class="prov"><q>Gut Ding will Weile haben.</q><span>Good things take time.</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT: quick facts (grade, students taught, levels) -->
+<section>
+  <div class="wrap">
+    <h2>Über mich <small style="font-size:.5em;color:var(--muted);font-weight:500">· About me</small></h2>
+    <p class="sub">Proven results in KCSE German and hands-on teaching experience.</p>
+    <div class="stats">
+      <div class="stat"><b>A</b><span>KCSE German grade</span></div>
+      <div class="stat"><b>3</b><span>Students taught</span></div>
+      <div class="stat"><b>A1–B1</b><span>Levels covered</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- RATES: price per lesson -->
+<section id="rates" style="padding-top:0">
+  <div class="wrap">
+    <h2>Preise <small style="font-size:.5em;color:var(--muted);font-weight:500">· Rates</small></h2>
+    <p class="sub">Simple, fair pricing.</p>
+    <div class="price">
+      <div class="amt">KES 1,500<small> / 2 hours</small></div>
+      <ul>
+        <li>Any level: A1, A2 or B1</li>
+        <li>Speaking, listening, reading and writing</li>
+        <li>Practice material included</li>
       </ul>
-    </section>
+      <a class="btn" href="#contact">Book now</a>
+    </div>
+  </div>
+</section>
 
-    <hr class="mx-auto w-1/2 bg-black dark:bg-white" />
-
-    <section id="testimonials"
-      class="widescreen:section-min-height tallscreen:section-min-height my-12 scroll-mt-20 p-6">
-      <h2 class="mb-6 text-center text-4xl font-bold text-slate-900 dark:text-white sm:text-5xl">
-        Testimonials
-      </h2>
-      <figure class="my-12">
-        <blockquote class="relative rounded-3xl bg-teal-600 py-12 pl-14 pr-8 dark:bg-black">
-          <p
-            class="mt-2 text-left text-2xl text-white before:absolute before:top-0 before:left-0 before:translate-x-2 before:translate-y-2 before:transform before:font-serif before:text-9xl before:text-white before:opacity-25 before:content-['\201C'] after:absolute after:-bottom-20 after:right-0 after:-translate-x-2 after:-translate-y-2 after:transform after:font-serif after:text-9xl after:text-white after:opacity-25 after:content-['\201D'] dark:text-slate-400 sm:text-3xl">
-            Acme has always been there for me. Their Explorer rocket arrived
-            in a wooden crate as expected. Life-long customer! A++ shopping
-            experience.
-          </p>
-        </blockquote>
-        <figcaption class="mt-2 text-right text-xl italic text-slate-500 dark:text-slate-400 sm:text-2xl">
-          &#8212;Wile E. Coyote, Genius
-        </figcaption>
-      </figure>
-      <figure class="my-12">
-        <blockquote class="relative rounded-3xl bg-teal-600 py-12 pl-14 pr-8 dark:bg-black">
-          <p
-            class="mt-2 text-left text-2xl text-white before:absolute before:top-0 before:left-0 before:translate-x-2 before:translate-y-2 before:transform before:font-serif before:text-9xl before:text-white before:opacity-25 before:content-['\201C'] after:absolute after:-bottom-20 after:right-0 after:-translate-x-2 after:-translate-y-2 after:transform after:font-serif after:text-9xl after:text-white after:opacity-25 after:content-['\201D'] dark:text-slate-400 sm:text-3xl">
-            The Acme Adventurer Rocket has thwarted my Illudium Q-36 Explosive
-            Space Modulator on several occassions.
-            <span class="italic">This makes me very, very angry!</span>
-            Nevertheless, K-9 and I have awarded Acme the Martian contract for
-            space exploration rockets based on Acme's quality and sturdy
-            designs.
-          </p>
-        </blockquote>
-        <figcaption class="mt-2 text-right text-xl italic text-slate-500 dark:text-slate-400 sm:text-2xl">
-          &#8212;Marvin The Martian &amp; K-9
-        </figcaption>
-      </figure>
-      <figure class="my-12">
-        <blockquote class="relative rounded-3xl bg-teal-600 py-12 pl-14 pr-8 dark:bg-black">
-          <p
-            class="mt-2 text-left text-2xl text-white before:absolute before:top-0 before:left-0 before:translate-x-2 before:translate-y-2 before:transform before:font-serif before:text-9xl before:text-white before:opacity-25 before:content-['\201C'] after:absolute after:-bottom-20 after:right-0 after:-translate-x-2 after:-translate-y-2 after:transform after:font-serif after:text-9xl after:text-white after:opacity-25 after:content-['\201D'] dark:text-slate-400 sm:text-3xl">
-            I knew I not only wanted &#8212;
-            <span class="italic">I needed</span> &#8212; Acme's Infinity
-            Rocket for my mission in space. Acme delivered in one day! Nothing
-            says <q class="italic">Take me to your leader</q> like Acme's
-            Infinity Rocket! 💯
-          </p>
-        </blockquote>
-        <figcaption class="mt-2 text-right text-xl italic text-slate-500 dark:text-slate-400 sm:text-2xl">
-          &#8212;Buzz Lightyear
-        </figcaption>
-      </figure>
-    </section>
-
-    <hr class="mx-auto w-1/2 bg-black dark:bg-white" />
-
-    <section id="contact" class="widescreen:section-min-height tallscreen:section-min-height my-12 scroll-mt-16 p-6">
-      <h2 class="mb-6 text-center text-4xl font-bold text-slate-900 dark:text-white sm:text-5xl">
-        Contact Us
-      </h2>
-      <form action="" class="items-left mx-auto flex max-w-4xl flex-col gap-4 text-2xl sm:text-3xl">
-        <label for="subject">Subject:</label>
-        <input type="text" id="subject" name="subject" required minlength="3" maxlength="60" placeholder="Your Subject"
-          class="w-full rounded-xl border border-solid border-slate-900 p-3 text-2xl text-black dark:border-none sm:text-3xl" />
-        <label for="message">Message:</label>
-        <textarea name="message" id="message" cols="30" rows="10" placeholder="Your Message" required
-          class="w-full rounded-xl border border-solid border-slate-900 p-3 text-2xl text-black dark:border-none sm:text-3xl"></textarea>
-        <button
-          class="w-48 rounded-xl border border-solid border-slate-900 bg-teal-700 p-3 text-white hover:bg-teal-600 active:bg-teal-500 dark:border-none">
-          Submit
-        </button>
+<!-- REVIEWS: the list is filled by script.js; the form is on the right -->
+<section id="reviews" class="band band2">
+  <div class="wrap">
+    <h2>Das sagen meine Schüler</h2>
+    <p class="sub" style="color:inherit;opacity:.75">What my students say. Past students, add yours below.</p>
+    <div class="reviews">
+      <div class="rlist" id="rlist"></div>
+      <form id="rform" style="color:var(--ink)">
+        <label>Your name<input id="rname" required maxlength="60" autocomplete="name"></label>
+        <label>Level studied
+          <select id="rlevel"><option>A1</option><option>A2</option><option>B1</option></select>
+        </label>
+        <label>Rating
+          <select id="rstars"><option value="5">★★★★★ Excellent</option><option value="4">★★★★ Very good</option><option value="3">★★★ Good</option><option value="2">★★ Fair</option><option value="1">★ Poor</option></select>
+        </label>
+        <label>Your review<textarea id="rtext" rows="4" required maxlength="500"></textarea></label>
+        <button class="btn" type="submit">Submit my review</button>
+        <button class="btn ghost" type="button" id="rmail">Send review to my tutor by email</button>
+        <p class="note" id="rstatus" role="status" style="color:var(--ink)"></p>
+        <p class="note">Your review will be visible to everyone who visits this page. If you make a mistake, use the Delete button on your review and write it again.</p>
       </form>
-    </section>
-  </main>
+    </div>
+  </div>
+</section>
 
-  <footer id="footer" class="bg-teal-700 text-xl text-white">
-    <section class="mx-auto flex max-w-4xl flex-col p-4 sm:flex-row sm:justify-between">
-      <address>
-        <h2>Acme Rocket-Powered Products, Inc.</h2>
-        555 Astro Way<br />
-        Fairfield, New Jersey 12345-5555<br />
-        Email:
-        <a href="mailto:inquiries@acmerockets.com">Inquires@AcmeRockets.com</a><br />
-        Phone: <a href="tel:+15555555555">(555) 555-5555</a>
-      </address>
-      <nav class="hidden flex-col gap-2 md:flex" aria-label="footer">
-        <a href="#rockets" class="hover:opacity-90">Our Rockets</a>
-        <a href="#testimonials" class="hover:opacity-90">Testimonials</a>
-        <a href="#contact" class="hover:opacity-90">Contact Us</a>
-      </nav>
-      <div class="flex flex-col sm:gap-2">
-        <p class="text-right">Copyright &copy; <span id="year">2022</span></p>
-        <p class="text-right">All Rights Reserved</p>
-      </div>
-    </section>
-  </footer>
+<!-- TECH & CODE: about you as a software developer -->
+<section id="tech" class="tint">
+  <div class="wrap">
+    <h2>Tech &amp; Code <small style="font-size:.5em;color:var(--muted);font-weight:500">· Beyond the classroom</small></h2>
+    <p class="sub">I’m also a software developer, and I love technology.</p>
+    <div class="techgrid">
+      <div class="card"><h3>Developer by day, Deutsch by choice</h3><p style="margin:0;color:var(--muted)">I build software and follow new technology closely. German is a language of engineering, science and innovation, so I enjoy helping learners use it for study, work and tech careers.</p>
+        <div class="tags"><span>Software development</span><span>Web &amp; apps</span><span>Problem solving</span><span>Tech enthusiast</span></div></div>
+      <div class="card"><h3>Tech-friendly lessons</h3><p style="margin:0;color:var(--muted)">Lessons can be online, with digital notes, practice exercises and useful apps. You can also pick up tech vocabulary, such as <i>der Computer</i>, <i>die Datei</i> and <i>das Passwort</i>.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT: phone, WhatsApp and email. Change your details here -->
+<section id="contact">
+  <div class="wrap">
+    <h2>Kontakt <small style="font-size:.5em;color:var(--muted);font-weight:500">· Get in touch</small></h2>
+    <p class="sub">Ready to start? Send a message and we’ll agree on a time.</p>
+    <div class="contact">
+      <div class="card"><h3>Phone / WhatsApp</h3><a href="tel:+254141910084">0141 910 084</a><p style="margin:8px 0 0"><a href="https://wa.me/254141910084" style="font-size:1rem">Message on WhatsApp</a></p></div>
+      <div class="card"><h3>Email</h3><a href="mailto:gitauelvis60@gmail.com">gitauelvis60@gmail.com</a></div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER: copyright and a closing proverb -->
+<footer>
+  <b>© Elvis Wamuha Gitau</b><br><br>
+  <q>Wer eine neue Sprache lernt, gewinnt eine neue Welt.</q>
+  Whoever learns a new language gains a new world.
+</footer>
+
+<!-- Our own JavaScript (the reviews feature). Placed last so the page loads first. -->
+<script src="script.js"></script>
 </body>
-
 </html>
