@@ -204,7 +204,7 @@ footer q{font-family:Fraunces,serif;font-size:1.15rem;display:block;color:var(--
         <button class="btn" type="submit">Submit my review</button>
         <button class="btn ghost" type="button" id="rmail">Send review to my tutor by email</button>
         <p class="note" id="rstatus" role="status" style="color:var(--ink)"></p>
-        <p class="note">Reviews appear for everyone after they are approved. You can also send your review by email.</p>
+        <p class="note">Your review will be visible to everyone who visits this page. If you make a mistake, use the Delete button on your review and write it again.</p>
       </form>
     </div>
   </div>
@@ -241,17 +241,57 @@ footer q{font-family:Fraunces,serif;font-size:1.15rem;display:block;color:var(--
 
 <script>
 (function(){
-  // ====== SETUP: paste your Firebase Project ID between the quotes ======
+  // ====== SETUP ======
   var PROJECT_ID = "elvis-german-tutor-ff3c4";
-  var API_KEY = "";   // optional, leave empty unless Firebase asks for it
-  // =======================================================================
-  var EMAIL="gitauelvis60@gmail.com", KEY="german-tutor-reviews";
+  var API_KEY = "AIzaSyDXHJ3dbWq6oRR5xjbxRljk8NWqWOguhzU";   // Firebase Web API key (needed so visitors can delete their own review)
+  // ===================
+  var EMAIL="gitauelvis60@gmail.com", KEY="german-tutor-reviews", AKEY="german-tutor-auth";
   var BASE="https://firestore.googleapis.com/v1/projects/"+PROJECT_ID+"/databases/(default)/documents";
   var Q=API_KEY?("?key="+encodeURIComponent(API_KEY)):"";
-  var live=!!PROJECT_ID, shared=[], mine=[];
+  var live=!!PROJECT_ID, shared=[], mine=[], auth=null;
   try{mine=JSON.parse(localStorage.getItem(KEY)||"[]")}catch(e){mine=[]}
+  try{auth=JSON.parse(localStorage.getItem(AKEY)||"null")}catch(e){auth=null}
   var list=document.getElementById("rlist"), status=document.getElementById("rstatus");
   function say(m){status.textContent=m}
+
+  function saveAuth(){try{localStorage.setItem(AKEY,JSON.stringify(auth))}catch(e){}}
+  function signUp(){
+    return fetch("https://identitytoolkit.googleapis.com/v1/accounts:signUp?key="+encodeURIComponent(API_KEY),
+      {method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({returnSecureToken:true})})
+    .then(function(r){return r.json()}).then(function(j){
+      if(!j.idToken)return null;
+      auth={idToken:j.idToken,refreshToken:j.refreshToken,uid:j.localId,exp:Date.now()+parseInt(j.expiresIn,10)*1000};
+      saveAuth();return auth;
+    }).catch(function(){return null});
+  }
+  function getAuth(){
+    if(!API_KEY)return Promise.resolve(null);
+    if(auth&&auth.idToken&&auth.exp>Date.now()+60000)return Promise.resolve(auth);
+    if(auth&&auth.refreshToken){
+      return fetch("https://securetoken.googleapis.com/v1/token?key="+encodeURIComponent(API_KEY),
+        {method:"POST",headers:{"Content-Type":"application/x-www-form-urlencoded"},
+         body:"grant_type=refresh_token&refresh_token="+encodeURIComponent(auth.refreshToken)})
+      .then(function(r){return r.json()}).then(function(j){
+        if(!j.id_token)throw new Error("refresh");
+        auth={idToken:j.id_token,refreshToken:j.refresh_token,uid:j.user_id,exp:Date.now()+parseInt(j.expires_in,10)*1000};
+        saveAuth();return auth;
+      }).catch(function(){auth=null;return signUp()});
+    }
+    return signUp();
+  }
+
+  function del(id){
+    if(!confirm("Delete your review?"))return;
+    say("Deleting...");
+    getAuth().then(function(a){
+      if(!a)throw new Error("not signed in");
+      return fetch(BASE+"/reviews/"+encodeURIComponent(id)+Q,{method:"DELETE",headers:{Authorization:"Bearer "+a.idToken}});
+    }).then(function(res){
+      if(!res.ok)throw new Error("HTTP "+res.status);
+      say("Your review was deleted.");load();
+    }).catch(function(){say("Sorry, that review could not be deleted. You can only delete reviews you wrote on this device.")});
+  }
+
   function render(){
     list.textContent="";
     var all=live?shared:mine;
@@ -265,7 +305,14 @@ footer q{font-family:Fraunces,serif;font-size:1.15rem;display:block;color:var(--
       var s=document.createElement("div");s.className="stars";s.textContent="\u2605".repeat(r.stars)+"\u2606".repeat(5-r.stars);
       var p=document.createElement("p");p.textContent=r.text;
       var m=document.createElement("small");m.textContent=r.name+" \u00b7 Level "+r.level;
-      d.append(s,p,m);list.appendChild(d);
+      d.append(s,p,m);
+      if(live&&r.id&&r.uid&&auth&&auth.uid===r.uid){
+        var b=document.createElement("button");b.type="button";b.textContent="Delete my review";
+        b.style.cssText="display:block;margin-top:10px;background:none;border:1px solid var(--line);color:var(--accent);border-radius:999px;padding:5px 12px;font:inherit;font-size:.85rem;cursor:pointer";
+        b.addEventListener("click",function(){del(r.id)});
+        d.appendChild(b);
+      }
+      list.appendChild(d);
     });
   }
   function load(){
@@ -277,7 +324,9 @@ footer q{font-family:Fraunces,serif;font-size:1.15rem;display:block;color:var(--
     .then(function(rows){
       shared=(Array.isArray(rows)?rows:[]).filter(function(x){return x.document}).map(function(x){
         var f=x.document.fields||{};
-        return {name:(f.name&&f.name.stringValue)||"Student",level:(f.level&&f.level.stringValue)||"",
+        return {id:x.document.name.split("/").pop(),
+          uid:(f.uid&&f.uid.stringValue)||"",
+          name:(f.name&&f.name.stringValue)||"Student",level:(f.level&&f.level.stringValue)||"",
           stars:parseInt((f.stars&&f.stars.integerValue)||5,10),text:(f.text&&f.text.stringValue)||"",
           t:(f.createdAt&&f.createdAt.timestampValue)||""};
       }).sort(function(a,b){return a.t<b.t?1:-1});
@@ -298,15 +347,16 @@ footer q{font-family:Fraunces,serif;font-size:1.15rem;display:block;color:var(--
       form.reset();render();return;
     }
     var btn=form.querySelector("button[type=submit]");btn.disabled=true;say("Sending...");
-    fetch(BASE+"/reviews"+Q,{method:"POST",headers:{"Content-Type":"application/json"},
-      body:JSON.stringify({fields:{
-        name:{stringValue:r.name},level:{stringValue:r.level},stars:{integerValue:String(r.stars)},
-        text:{stringValue:r.text},approved:{booleanValue:false},
-        createdAt:{timestampValue:new Date().toISOString()}}})})
-    .then(function(res){
+    getAuth().then(function(a){
+      var f={name:{stringValue:r.name},level:{stringValue:r.level},stars:{integerValue:String(r.stars)},
+        text:{stringValue:r.text},approved:{booleanValue:true},createdAt:{timestampValue:new Date().toISOString()}};
+      var h={"Content-Type":"application/json"};
+      if(a){f.uid={stringValue:a.uid};h.Authorization="Bearer "+a.idToken}
+      return fetch(BASE+"/reviews"+Q,{method:"POST",headers:h,body:JSON.stringify({fields:f})});
+    }).then(function(res){
       if(!res.ok){return res.json().catch(function(){return {}}).then(function(j){
         var m=(j&&j.error&&(j.error.status+": "+j.error.message))||("HTTP "+res.status);throw new Error(m)})}
-      form.reset();say("Thank you! Your review will appear here once Elvis approves it.");
+      form.reset();say("Thank you! Your review has been added.");load();
     }).catch(function(err){console.error(err);say("Sorry, your review could not be sent ("+(err&&err.message?err.message.slice(0,120):"network error")+"). Please try again or use the email button.")})
     .then(function(){btn.disabled=false});
   });
