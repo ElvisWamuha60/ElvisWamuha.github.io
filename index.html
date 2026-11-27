@@ -201,9 +201,10 @@ footer q{font-family:Fraunces,serif;font-size:1.15rem;display:block;color:var(--
           <select id="rstars"><option value="5">★★★★★ Excellent</option><option value="4">★★★★ Very good</option><option value="3">★★★ Good</option><option value="2">★★ Fair</option><option value="1">★ Poor</option></select>
         </label>
         <label>Your review<textarea id="rtext" rows="4" required maxlength="500"></textarea></label>
-        <button class="btn" type="submit">Add my review</button>
+        <button class="btn" type="submit">Submit my review</button>
         <button class="btn ghost" type="button" id="rmail">Send review to my tutor by email</button>
-        <p class="note">Your review shows on this device straight away. Use the email button to send it to your tutor for the public list.</p>
+        <p class="note" id="rstatus" role="status" style="color:var(--ink)"></p>
+        <p class="note">Reviews appear for everyone after they are approved. You can also send your review by email.</p>
       </form>
     </div>
   </div>
@@ -240,14 +241,20 @@ footer q{font-family:Fraunces,serif;font-size:1.15rem;display:block;color:var(--
 
 <script>
 (function(){
+  // ====== SETUP: paste your Firebase Project ID between the quotes ======
+  var PROJECT_ID = "elvis-german-tutor";
+  var API_KEY = "";   // optional, leave empty unless Firebase asks for it
+  // =======================================================================
   var EMAIL="gitauelvis60@gmail.com", KEY="german-tutor-reviews";
-  var base=[];
-  var mine=[];
+  var BASE="https://firestore.googleapis.com/v1/projects/"+PROJECT_ID+"/databases/(default)/documents";
+  var Q=API_KEY?("?key="+encodeURIComponent(API_KEY)):"";
+  var live=!!PROJECT_ID, shared=[], mine=[];
   try{mine=JSON.parse(localStorage.getItem(KEY)||"[]")}catch(e){mine=[]}
-  var list=document.getElementById("rlist");
+  var list=document.getElementById("rlist"), status=document.getElementById("rstatus");
+  function say(m){status.textContent=m}
   function render(){
     list.textContent="";
-    var all=base.concat(mine);
+    var all=live?shared:mine;
     if(!all.length){
       var d=document.createElement("div");d.className="empty";
       d.textContent="No reviews yet. Be the first to share your experience.";
@@ -255,11 +262,27 @@ footer q{font-family:Fraunces,serif;font-size:1.15rem;display:block;color:var(--
     }
     all.forEach(function(r){
       var d=document.createElement("div");d.className="review";d.style.color="var(--ink)";
-      var s=document.createElement("div");s.className="stars";s.textContent="★".repeat(r.stars)+"☆".repeat(5-r.stars);
+      var s=document.createElement("div");s.className="stars";s.textContent="\u2605".repeat(r.stars)+"\u2606".repeat(5-r.stars);
       var p=document.createElement("p");p.textContent=r.text;
-      var m=document.createElement("small");m.textContent=r.name+" · Level "+r.level;
+      var m=document.createElement("small");m.textContent=r.name+" \u00b7 Level "+r.level;
       d.append(s,p,m);list.appendChild(d);
     });
+  }
+  function load(){
+    if(!live)return render();
+    fetch(BASE+":runQuery"+Q,{method:"POST",headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({structuredQuery:{from:[{collectionId:"reviews"}],
+        where:{fieldFilter:{field:{fieldPath:"approved"},op:"EQUAL",value:{booleanValue:true}}}}})})
+    .then(function(r){return r.json()})
+    .then(function(rows){
+      shared=(Array.isArray(rows)?rows:[]).filter(function(x){return x.document}).map(function(x){
+        var f=x.document.fields||{};
+        return {name:(f.name&&f.name.stringValue)||"Student",level:(f.level&&f.level.stringValue)||"",
+          stars:parseInt((f.stars&&f.stars.integerValue)||5,10),text:(f.text&&f.text.stringValue)||"",
+          t:(f.createdAt&&f.createdAt.timestampValue)||""};
+      }).sort(function(a,b){return a.t<b.t?1:-1});
+      render();
+    }).catch(function(){render();say("Reviews could not be loaded right now.")});
   }
   function read(){
     return {name:document.getElementById("rname").value.trim(),level:document.getElementById("rlevel").value,
@@ -268,9 +291,23 @@ footer q{font-family:Fraunces,serif;font-size:1.15rem;display:block;color:var(--
   document.getElementById("rform").addEventListener("submit",function(e){
     e.preventDefault();
     var r=read();if(!r.name||!r.text)return;
-    mine.push(r);
-    try{localStorage.setItem(KEY,JSON.stringify(mine))}catch(err){}
-    e.target.reset();render();
+    var form=e.target;
+    if(!live){
+      mine.push(r);
+      try{localStorage.setItem(KEY,JSON.stringify(mine))}catch(err){}
+      form.reset();render();return;
+    }
+    var btn=form.querySelector("button[type=submit]");btn.disabled=true;say("Sending...");
+    fetch(BASE+"/reviews"+Q,{method:"POST",headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({fields:{
+        name:{stringValue:r.name},level:{stringValue:r.level},stars:{integerValue:String(r.stars)},
+        text:{stringValue:r.text},approved:{booleanValue:false},
+        createdAt:{timestampValue:new Date().toISOString()}}})})
+    .then(function(res){
+      if(!res.ok)throw new Error("fail");
+      form.reset();say("Thank you! Your review will appear here once Elvis approves it.");
+    }).catch(function(){say("Sorry, your review could not be sent. Please try again or use the email button.")})
+    .then(function(){btn.disabled=false});
   });
   document.getElementById("rmail").addEventListener("click",function(){
     var r=read();
@@ -278,7 +315,7 @@ footer q{font-family:Fraunces,serif;font-size:1.15rem;display:block;color:var(--
     var body="Name: "+r.name+"\nLevel: "+r.level+"\nRating: "+r.stars+"/5\n\n"+r.text;
     location.href="mailto:"+EMAIL+"?subject="+encodeURIComponent("Review for my German lessons")+"&body="+encodeURIComponent(body);
   });
-  render();
+  load();
 })();
 </script>
 </body>
